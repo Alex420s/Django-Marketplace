@@ -6,11 +6,11 @@
 {% endblock  %}
 {% block content %}
 
-<section class="grid md:grid-cols-5 gap-6 mt-6 px-6">
-    <figure class="md:col-span-3  ">
+<section class="grid md:grid-cols-5 gap-6 mt-6 px-6 ">
+    <figure class="md:col-span-3 px-2.4 ">
         <img src="{{ product.image.url }}" alt="{{ product.name }}" class="rounded-xl block  bg-white w-full object-cover object-center">
     </figure>
-    <article class="md:col-span-2 p-6 bg-gray-100 rounded-xl">
+    <article class="md:col-span-2 p-8   bg-gray-100 rounded-xl ">
         <h1 class="mb-6 text-3xl">{{ product.name }}</h1>
         <p class="text-gray-500"><strong>Price: </strong>{{ product.price }}</p>
         <p class="text-gray-500"><strong>Seller: </strong>{{ product.created_by.username }}</p>
@@ -25,10 +25,11 @@
     </article>
 
 </section>
-<div class="p-6">
-<article class="p-6  bg-cyan-400 rounded-xl">
+
+<div class="p-6 px-2 ">
+<article class="p-8  bg-cyan-400 rounded-xl">
     <h2 class="mb-12 text-3xl  text-center text-cyan-50  font-bold">Productos similares</h2>
-    <section class="grid md:grid-cols-3 gap-6 grid-rows-1">
+    <section class="grid md:grid-cols-3 gap-6">
         {% for product in related_products  %}
         <article>
             <a href="{% url 'products:detail' product.id %}">

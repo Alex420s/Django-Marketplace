@@ -25,11 +25,11 @@
         </article>
     </section>
     <section class="dark:bg-violet-400">
-        <article class="px-6 p-12 mx-4  bg-cyan-400 rounded-xl">
-            <h2 class="mb-12 text-3xl  text-center text-cyan-50  font-bold">Productos recientes</h2>
-            <section class="grid  md:grid-cols-5  gap-6 grid-cols-2 grid-rows-2">
+        <article class="px-16 p-12 mx-4  bg-cyan-400 rounded-xl">
+            <h2 class="mb-12 text-3xl  text-center text-gray-600  font-extrabold">Productos recientes</h2>
+            <section class="grid md:grid-cols-3 gap-6   mx-4">
                 {% for product in productos  %}
-                <article>
+                <article class="md:p-8">
                     <a href="{% url 'products:detail' product.id %}">
                     <img src="{{ product.image.url }}" alt="{{ product.name }}" class="rounded-t-xl block  bg-white w-full rounded-lg object-cover object-center">
                     <section class="p-6 bg-white rounded-b-xl">
