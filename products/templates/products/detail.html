@@ -7,8 +7,8 @@
 {% block content %}
 
 <section class="grid md:grid-cols-5 gap-6 mt-6 px-6">
-    <figure class="md:col-span-3 ">
-        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="rounded-xl">
+    <figure class="md:col-span-3  ">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="rounded-xl block  bg-white w-full object-cover object-center">
     </figure>
     <article class="md:col-span-2 p-6 bg-gray-100 rounded-xl">
         <h1 class="mb-6 text-3xl">{{ product.name }}</h1>
@@ -32,7 +32,7 @@
         {% for product in related_products  %}
         <article>
             <a href="{% url 'products:detail' product.id %}">
-            <img src="{{ product.image.url }}" alt="{{ product.name }} " class="rounded-t-xl ">
+            <img src="{{ product.image.url }}" alt="{{ product.name }} " class="rounded-t-xl block  bg-white w-full rounded-lg object-cover object-center">
             <section class="p-6 bg-white rounded-b-xl">
                 <h2 class="text-2xl">{{ product.name }}</h2>
                 <p class="text-gray-500">Precio: {{ product.price }}</p>
