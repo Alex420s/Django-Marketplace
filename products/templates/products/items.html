@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+{% block title %} Items {% endblock %}
+
+{% block content %} 
+    </article class="pb-6 grid grid-cols-4 gap-4 ">
+        <section class="col-span-1">
+            <form action="{% url 'products:items' %}" method="get">
+                <input type="text" name="query" class="w-full py-4 px-6 border rounded-xl" value="{{query}}" placeholder="Find a product..">
+                <button class="mt-2 py-4 px-8 text-lg bg-teal-500 text-white rounded-xl">Search</button>
+            </form>
+
+            <hr class="my-6">
+
+            <p class="font-semibold">Categories</p>
+
+            <ul>
+                {% for category in categories %}
+                    <li class="py-2 px-2 rounded-xl{% if category.id == category_id %} bg-cyan-500 text-white{% endif %}">
+                        <a href="{% url "products:items" %}?query={{query}}&category={{category.id}}">{{category.name}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <hr class="my-6">
+
+            <p class="font-semibold">Clear filters</p>
+
+            <ul>
+                <li><a href="{% url "products:items" %}" class="mt-4 py-4 px-8 inline-block bg-teal-500 text-lg rounded-xl text-white">Clear</a></li>
+            </ul>
+
+        </section> 
+        <section class="col-span-3">
+            <section class="grid md:grid-cols-3 gap-6   mx-4">
+                {% for product in items %}
+                <article class="md:p-8">
+                    <a href="{% url 'products:detail' product.id %}">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="rounded-t-xl block  bg-white w-full rounded-lg object-cover object-center">
+                    <section class="p-6 bg-white rounded-b-xl">
+                        <h2 class="text-2xl">{{ product.name }}</h2>
+                        <p class="text-gray-500">Precio: {{ product.price }}</p>
+                        <!-- <div>{{ product.description }}</div>     -->
+                    </section>
+                    </a>
+                </article>
+                {% endfor %}
+            </section>
+        </section>
+    </article>
+
+{% endblock  %}

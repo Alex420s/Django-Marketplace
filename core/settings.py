@@ -9,26 +9,34 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import environ
 import os
 from pathlib import Path
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# Take environment variables from .env file
+environ.Env.read_env(BASE_DIR / '.env')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-q%38$rtqt63fq+hr(3a164t^!uu133nsvq^##=$=)8)6gg0@%-'
+SECRET_KEY = env('key')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app','127.0.0.1']
 
-
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,7 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base',
+    'dashboard',
     'products',
+    'conversation',
 ]
 
 MIDDLEWARE = [
@@ -80,17 +90,17 @@ DATABASES = {
 
     'default': {
 
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',                                                                     
 
-        'NAME': 'postgres',
+        'NAME': env('POSTGRES_DB_NAME'),
 
-        'USER': 'postgres',
+        'USER': env('POSTGRES_DB_USER'),
 
-        'PASSWORD': 'Greta24sep20',
+        'PASSWORD': env('POSTGRES_DB_PASSWORD'),
 
-        'HOST': 'db.vezxpnsaqhfmfyqnlijs.supabase.co',
+        'HOST': env('POSTGRES_DB_HOST'),
 
-        'PORT': '5432',
+        'PORT': env('POSTGRES_DB_PORT'),
 
     }
 

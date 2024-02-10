@@ -22,7 +22,7 @@ def signup(request):
         if form.is_valid():
             form.save()
 
-            return redirect('login/')
+            return redirect('dashboard:index')
     else:
         form = SignupForm()
 

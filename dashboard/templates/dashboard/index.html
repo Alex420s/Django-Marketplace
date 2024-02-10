@@ -1,0 +1,24 @@
+{% extends "base/base.html" %}
+
+{% block title %}Dashboard{% endblock  %}
+
+{% block content %}
+    
+  <article class="px-16 p-12 mx-4  bg-cyan-400 rounded-xl">
+            <h2 class="mb-12 text-3xl  text-center text-gray-600  font-extrabold">Mis productos</h2>
+            <section class="grid md:grid-cols-3 gap-6   mx-4">
+                {% for product in productos  %}
+                <article class="md:p-8">
+                    <a href="{% url 'products:detail' product.id %}">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="rounded-t-xl block  bg-white w-full rounded-lg object-cover object-center">
+                    <section class="p-6 bg-white rounded-b-xl">
+                        <h2 class="text-2xl">{{ product.name }}</h2>
+                        <p class="text-gray-500">Precio: {{ product.price }}</p>
+                        <!-- <div>{{ product.description }}</div>     -->
+                    </section>
+                    </a>
+                </article>
+                {% endfor %}
+            </section>
+        </article>
+        {% endblock %}
