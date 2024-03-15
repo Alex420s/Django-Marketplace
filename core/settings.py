@@ -13,6 +13,7 @@ import environ
 import os
 from pathlib import Path
 
+DEBUG=(bool, True)
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, True)
@@ -32,7 +33,7 @@ environ.Env.read_env(BASE_DIR / '.env')
 SECRET_KEY = env('key')
 
 
-ALLOWED_HOSTS = ['.vercel.app','127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -85,26 +87,15 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# Render
+import dj_database_url
 
 DATABASES = {
-
-    'default': {
-
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',                                                                     
-
-        'NAME': env('POSTGRES_DB_NAME'),
-
-        'USER': env('POSTGRES_DB_USER'),
-
-        'PASSWORD': env('POSTGRES_DB_PASSWORD'),
-
-        'HOST': env('POSTGRES_DB_HOST'),
-
-        'PORT': env('POSTGRES_DB_PORT'),
-
-    }
-
-}
+    'default': dj_database_url.config(        
+    # Replace this value with your local database's connection string.     
+    default='postgresql://postgres:MCejyNSHEHFMOjQKkbcLmLQeHPiBjurv@roundhouse.proxy.rlwy.net:32986/railway',  
+    conn_max_age=600   
+    )}
 
 
 # Password validation
@@ -141,10 +132,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-
-STATICFILES_DIRS =[BASE_DIR / 'static']
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# This production code might break development mode, so we check whether we're in DEBUG mode
+if not DEBUG:    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+    # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 
