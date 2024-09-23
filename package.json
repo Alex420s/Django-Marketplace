@@ -3,8 +3,7 @@
   "name": "marketplace",
   "scripts": {
     "start": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch",
-    "build": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify",
-    "bash": "sh ./build.sh"
+    "build": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify && sh ./build.sh "
 
   },
   "devDependencies": {
