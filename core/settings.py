@@ -90,10 +90,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Render
 import dj_database_url
 
+POSTGRES_DB = env('POSTGRES_DB')
+
+
 DATABASES = {
     'default': dj_database_url.config(        
     # Replace this value with your local database's connection string.     
-    default='postgresql://postgres:MCejyNSHEHFMOjQKkbcLmLQeHPiBjurv@roundhouse.proxy.rlwy.net:32986/railway',  
+    default=f'{POSTGRES_DB}',  
     conn_max_age=600   
     )}
 
