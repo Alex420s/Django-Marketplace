@@ -1,5 +1,5 @@
 {"name":"marketplace",
 "scripts": {
     "build": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify",
-    "postinstall": "sh ./build.sh"
+    "postinstall": "python manage.py collectstatic --noinput && python manage.py migrate"
   },"devDependencies":{"tailwindcss":"^3.3.2"}}
