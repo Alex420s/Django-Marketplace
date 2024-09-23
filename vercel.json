@@ -5,8 +5,8 @@
         "use": "@vercel/python",
         "config": {
           "installCommand": "pip install -r requirements.txt && npm install",
-          "buildCommand": "python manage.py collectstatic --noinput && python manage.py migrate && npm run build",
-          "startCommand": "gunicorn your_project_name.wsgi"
+          "buildCommand": "npm run build && python manage.py collectstatic --noinput && python manage.py migrate  ",
+          "startCommand": "gunicorn core.wsgi"
         }
       }
     ],
