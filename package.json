@@ -1,1 +1,1 @@
-{"name":"marketplace","scripts":{"start":"npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch","build":"npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify && sh ./build.sh "},"devDependencies":{"tailwindcss":"^3.3.2"}}
+{"name":"marketplace","scripts":{"start":"npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch","build":"npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify"},"devDependencies":{"tailwindcss":"^3.3.2"}}
