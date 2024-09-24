@@ -136,7 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # This production code might break development mode, so we check whether we're in DEBUG mode
 if not DEBUG:    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
@@ -145,9 +145,12 @@ if not DEBUG:    # Tell Django to copy static assets into a path called `staticf
     # and renames the files with unique names for each version to support long-term caching
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# Enable the WhiteNoise storage backend,
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = BASE_DIR / 'static/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
