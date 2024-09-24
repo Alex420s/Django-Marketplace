@@ -33,7 +33,7 @@ environ.Env.read_env(BASE_DIR / '.env')
 SECRET_KEY = env('key')
 
 
-ALLOWED_HOSTS = ['http://0.0.0.0:10000/','127.0.0.1']
+ALLOWED_HOSTS = ['django-marketplace-dp25.onrender.com','127.0.0.1']
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
